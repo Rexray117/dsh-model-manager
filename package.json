@@ -1,0 +1,32 @@
+{
+  "name": "dsh-model-manager",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Model and provider manager page for DeepSeek Harness: browse every configured provider, inspect its models, set the default model, and watch remaining credits with per-model burn rates.",
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "quota.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md"
+  ],
+  "icon": "icon.svg",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true
+    }
+  }
+}

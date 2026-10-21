@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Model Manager",
+    "description": "Browse every connected provider and its models, watch remaining credits per provider and the burn rate of each model, and set the default model."
+  }
+}
