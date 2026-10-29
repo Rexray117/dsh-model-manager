@@ -17,7 +17,11 @@
  * structural check (loopback host, no cross-site fetch, Origin/Referer match).
  */
 
-import { createQuota, dayKey, parseMultiplier } from './quota.js'
+import { channelState, createQuota, dayKey, dshHome, parseMultiplier } from './quota.js'
+import { createUsage } from './usage.js'
+import { createSessionScan } from './session-scan.js'
+import { createPlanUsage } from './opencode-plan.js'
+import { createHidden } from './hidden.js'
 
 const PREFIX = '/api/model-manager'
 const MAX_BODY_BYTES = 64 * 1024
@@ -38,7 +42,13 @@ export function apply(ctx) {
   const llm = () => ctx.llm
   const connection = () => ctx.get('connection')
   const defaultModel = () => ctx.get('agentDefaultModel')
-  const quota = createQuota(ctx)
+  // Session logs on disk are the only complete usage source; the host snapshot
+  // only exposes each session's tail.
+  const scan = createSessionScan({ home: dshHome() })
+  const quota = createQuota(ctx, scan)
+  const usage = createUsage(ctx, scan)
+  const planUsage = createPlanUsage({ home: dshHome() })
+  const hidden = createHidden(ctx, quota.channelRpc, dshHome(), channelState)
   /** provider id → Map(model id → { name, multiplier, label, free }) */
   const nameCache = new Map()
 
@@ -67,7 +77,14 @@ export function apply(ctx) {
       if (req.method === 'GET' && tail === '/models') return send(res, 200, await models(url))
       if (req.method === 'POST' && tail === '/default') return send(res, 200, await setDefault(req))
       if (req.method === 'GET' && tail === '/quota') return send(res, 200, await quotaView(url))
+      if (req.method === 'GET' && tail === '/plan') {
+        const force = url.searchParams.get('force') === '1'
+        if (force) planUsage.invalidate()
+        return send(res, 200, { ok: true, value: await planUsage.snapshot({ force }) })
+      }
       if (req.method === 'POST' && tail === '/quota/refresh') return send(res, 200, await refreshQuota())
+      if (req.method === 'GET' && tail === '/usage') return send(res, 200, await usageView(url))
+      if (req.method === 'POST' && tail === '/hidden') return send(res, 200, await setHidden(req))
       fail(res, 404, 'not-found', 'Unknown route')
     } catch (error) {
       if (error instanceof HttpError) fail(res, error.status, error.code, error.message)
@@ -274,6 +291,19 @@ export function apply(ctx) {
     }
     value.sort((a, b) => Number(b.registered) - Number(a.registered) || b.burn.weightedPerDay - a.burn.weightedPerDay)
 
+    // The plan meters are per key, not per model: fetch them once and attach the
+    // windows to every provider that reports them.
+    const plans = {}
+    if (value.some((provider) => provider.id === 'opencode-go')) {
+      const plan = await planUsage.snapshot()
+      if (plan !== null && plan !== undefined) plans['opencode-go'] = plan
+    }
+    for (const provider of value) {
+      const plan = plans[provider.id]
+      if (plan !== undefined) provider.plan = plan
+      else if (provider.id === 'opencode-go') provider.plan = { ok: false, windows: [], error: 'unavailable' }
+    }
+
     const totals = value.reduce((sum, provider) => {
       sum.tokens += provider.usage?.tokens ?? 0
       sum.requests += provider.usage?.requests ?? 0
@@ -291,6 +321,7 @@ export function apply(ctx) {
         balancesAt: quotaBalanceTimestamp(),
         accounts: accountList.length,
         totals,
+        plans,
         providers: value,
         models,
       },
@@ -388,14 +419,15 @@ export function apply(ctx) {
     }
   }
 
-  /** One provider's advertised models; dormant routes answer `not-active`. */
-  async function models(url) {
-    const provider = url.searchParams.get('provider') ?? ''
-    if (provider === '') throw new HttpError(400, 'invalid-request', 'provider is required')
+  /** Full catalog for one provider: offered models plus the hidden ones. */
+  async function describeCatalog(provider) {
     const service = llm()
-    let infos
+    const directory = service.listConfigurableProviders().find((entry) => entry.provider === provider)
+    const settingsNs = directory?.settingsNs ?? null
+    const mechanism = hidden.mechanismFor(provider, settingsNs)
+    let offered
     try {
-      infos = await service.listModels(provider)
+      offered = await service.listModels(provider)
     } catch (error) {
       const code = error?.code ?? ''
       if (code === 'NO_ADAPTER' || code === 'NO_ROUTE') {
@@ -403,13 +435,106 @@ export function apply(ctx) {
       }
       throw error
     }
-    const list = infos.map((info) => ({
-      id: info.id,
-      name: info.name || info.id,
-      description: info.description ?? null,
-      inputModalities: Array.isArray(info.inputModalities) ? [...info.inputModalities] : [],
-    }))
-    return { ok: true, value: { provider, models: list } }
+    const offeredMap = new Map(offered.map((info) => [info.id, info]))
+    const entries = new Map()
+    if (mechanism === 'channel') {
+      const result = await quota.channelRpc('model.list', { provider })
+      if (result?.ok === true && Array.isArray(result.value?.models)) {
+        for (const model of result.value.models) {
+          entries.set(model.id, {
+            id: model.id,
+            name: model.name || model.id,
+            hidden: model.disabled === true,
+            dead: model.dead === true,
+            free: model.isFree === true,
+          })
+        }
+      }
+    }
+    if (entries.size === 0) {
+      for (const info of offered) {
+        entries.set(info.id, { id: info.id, name: info.name || info.id, hidden: false, dead: false, free: false })
+      }
+      if (mechanism === 'config') {
+        // A pi-ai route's narrowed `models` list hides the rest; rediscover the
+        // installed catalog so the hidden rows stay visible and re-enableable.
+        let full = []
+        try {
+          const discovered = await service.discoverModels(settingsNs ?? 'llm-pi-ai', { provider })
+          if (Array.isArray(discovered)) full = discovered
+        } catch {
+          full = []
+        }
+        const catalogIds = [...new Set([...full.map((model) => model.id), ...offeredMap.keys()])]
+        for (const id of hidden.hiddenOf(provider, 'config', catalogIds)) {
+          if (entries.has(id)) continue
+          const meta = full.find((model) => model.id === id)
+          entries.set(id, { id, name: meta?.name ?? id, hidden: true, dead: false, free: false })
+        }
+      }
+    }
+    const list = [...entries.values()].map((entry) => {
+      const meta = offeredMap.get(entry.id)
+      return {
+        ...entry,
+        edition: editionOf(provider, entry.id),
+        description: meta?.description ?? null,
+        inputModalities: Array.isArray(meta?.inputModalities) ? [...meta.inputModalities] : [],
+      }
+    })
+    return { mechanism, list, settingsNs }
+  }
+
+  /** One provider's catalog with per-model visibility. */
+  async function models(url) {
+    const provider = url.searchParams.get('provider') ?? ''
+    if (provider === '') throw new HttpError(400, 'invalid-request', 'provider is required')
+    const { mechanism, list } = await describeCatalog(provider)
+    return {
+      ok: true,
+      value: {
+        provider,
+        models: list,
+        mechanism,
+        hidden: list.filter((model) => model.hidden).map((model) => model.id),
+      },
+    }
+  }
+
+  /** Hide or show models for one provider, through its owning mechanism. */
+  async function setHidden(req) {
+    const body = await readJson(req)
+    const provider = typeof body?.provider === 'string' ? body.provider : ''
+    const wanted = Array.isArray(body?.hidden) ? body.hidden.filter((id) => typeof id === 'string') : null
+    if (provider === '' || wanted === null) {
+      throw new HttpError(400, 'invalid-request', 'provider and hidden[] are required')
+    }
+    const { mechanism, list } = await describeCatalog(provider)
+    const catalogIds = list.map((model) => model.id)
+    try {
+      const applied = await hidden.setHidden(provider, wanted, mechanism, catalogIds)
+      return { ok: true, value: { provider, mechanism, hidden: applied } }
+    } catch (error) {
+      throw new HttpError(409, 'apply-failed', String(error?.message ?? error))
+    }
+  }
+
+  /** Hour/day/week/half-month/month series derived from session logs. */
+  async function usageView(url) {
+    const rawDays = Number(url.searchParams.get('days') ?? 30)
+    const days = Number.isFinite(rawDays) ? Math.min(Math.max(Math.trunc(rawDays), 1), 365) : 30
+    const provider = url.searchParams.get('provider') || null
+    const refreshed = await usage.refresh(Math.max(days, 30))
+    if (refreshed.available === false) {
+      return { ok: true, value: { available: false } }
+    }
+    const series = usage.series({ days, provider })
+    // The scan always reads at least a 30 day window, so report the request
+    // count that actually falls inside the requested window.
+    const source = series.source === null || typeof series.source !== 'object'
+      ? series.source
+      : { ...series.source, requests: series.totals.requests }
+    return { ok: true, value: { available: true, ...series, source } }
   }
 
   /** Persist one default selection after checking the route and its catalog. */
@@ -544,3 +669,27 @@ function authorityOf(value, defaultScheme) {
   const port = url.port === '' ? (url.protocol === 'https:' ? '443' : '80') : url.port
   return { scheme: url.protocol.replace(':', ''), hostname: url.hostname.toLowerCase(), port }
 }
+
+/**
+ * WorkBuddy ships two client builds against one model catalog: the domestic
+ * build (CodeBuddy / copilot.tencent.com) and the international one
+ * (www.workbuddy.ai). The catalog mixes both families, so each model carries
+ * the edition that actually serves it, and the UI can manage them as groups.
+ *
+ * @param provider - provider route id.
+ * @param modelId - exact model id.
+ * @returns 'intl', 'cn', 'shared', or null when the provider has no editions.
+ */
+export function editionOf(provider, modelId) {
+  const id = String(modelId ?? '').toLowerCase()
+  if (provider === 'buddy') return 'cn'
+  if (provider !== 'workbuddy') return null
+  if (INTL_PREFIXES.some((prefix) => id.startsWith(prefix))) return 'intl'
+  if (CN_PREFIXES.some((prefix) => id.startsWith(prefix))) return 'cn'
+  return 'shared'
+}
+
+/** Model families only the international WorkBuddy endpoint serves. */
+const INTL_PREFIXES = ['gpt-', 'gemini-', 'claude-', 'grok-', 'o1-', 'o3-', 'o4-', 'sora-', 'dall-e-']
+/** Model families served by the domestic CodeBuddy / WorkBuddy build. */
+const CN_PREFIXES = ['glm-', 'hy', 'kimi-', 'minimax-', 'deepseek-', 'doubao-', 'qwen-', 'hunyuan-', 'ernie-']

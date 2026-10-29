@@ -1,9 +1,34 @@
 {
   "name": "dsh-model-manager",
-  "version": "1.1.0",
+  "version": "1.4.1",
   "private": true,
-  "description": "Model and provider manager page for DeepSeek Harness: browse every configured provider, inspect its models, set the default model, and watch remaining credits with per-model burn rates.",
+  "description": "DeepSeek Harness plugin: model and provider manager page — browse every configured provider, hide or show models, set the default, watch remaining credits, plan-window quota (opencode Go) and real usage by hour/day/week/half-month/month read straight from session logs, with WorkBuddy edition grouping.",
   "type": "module",
+  "license": "MIT",
+  "author": {
+    "name": "Rexray117",
+    "url": "https://github.com/Rexray117"
+  },
+  "homepage": "https://github.com/Rexray117/dsh-model-manager#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rexray117/dsh-model-manager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Rexray117/dsh-model-manager/issues"
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "dsh-plugin",
+    "model-manager",
+    "provider",
+    "llm",
+    "quota",
+    "usage",
+    "opencode",
+    "workbuddy"
+  ],
   "exports": {
     ".": "./index.js",
     "./client": "./client.js",
@@ -13,11 +38,16 @@
   "files": [
     "index.js",
     "quota.js",
+    "usage.js",
+    "session-scan.js",
+    "opencode-plan.js",
+    "hidden.js",
     "client.js",
     "cordis.patch.yml",
     "locale/*.json",
     "icon.svg",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "icon": "icon.svg",
   "dsh": {

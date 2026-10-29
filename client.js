@@ -110,6 +110,59 @@ window.__ModuleLoader__.load({
         'quota.standard': '标准',
         'quota.credits': '积分',
         'quota.hint': '「加权÷日」把模型自带的价格倍率算进去，用于横向比较消耗速度；「速度」是输出 tokens/秒（来自渠道账本）。',
+        'tab.usage': '用量统计',
+        'usage.title': '用量统计',
+        'usage.subtitle': '按小时 / 日 / 周 / 半月 / 月查看真实 token 用量，数据来自会话日志。',
+        'usage.provider': '供应商',
+        'usage.all': '全部供应商',
+        'usage.period.hour': '小时',
+        'usage.period.day': '日',
+        'usage.period.week': '周',
+        'usage.period.half': '半月',
+        'usage.period.month': '月',
+        'usage.total': '{period}合计',
+        'usage.buckets': '{n} 个统计桶',
+        'usage.table.bucket': '时段',
+        'usage.table.tokens': 'tokens',
+        'usage.table.requests': '请求',
+        'usage.table.avg': '均 tokens/次',
+        'usage.table.top': '主要模型',
+        'usage.empty': '所选窗口内没有用量记录。',
+        'usage.loading': '正在读取会话日志…',
+        'usage.error': '用量数据加载失败',
+        'usage.partial': '部分会话尚未读完，数字可能略低',
+        'usage.refresh': '刷新用量',
+        'usage.checked': '更新于 {time}',
+        'usage.idle': '尚未加载',
+        'quota.plan': '计划额度',
+        'quota.plan.remaining': '剩余 {n}%',
+        'quota.plan.reset': '{date} 重置',
+        'quota.plan.rolling': '滚动窗口',
+        'quota.plan.weekly': '本周',
+        'quota.plan.monthly': '本月',
+        'quota.plan.none': '尚无计划数据',
+        'quota.plan.hint': '来自供应商官方接口，按 key 计量，与本地日志无关。',
+        'usage.source.logs': '会话日志全文：{files} 个会话 · {requests} 次请求',
+        'usage.source.snapshot': '宿主快照：{sessions} 个会话（可能不全）',
+        'usage.source.unavailable': '日志不可读，数据可能缺失',
+        'hidden.chip': '已屏蔽',
+        'hidden.show': '屏蔽',
+        'hidden.restore': '恢复',
+        'hidden.count': '{n} 已屏蔽',
+        'hidden.restoreAll': '全部恢复',
+        'hidden.hideAll': '全部屏蔽',
+        'hidden.confirm': '再点一次确认',
+        'hidden.saved': '已更新：{n} 个模型被屏蔽',
+        'hidden.hint': '屏蔽的模型不会再出现在对话框的模型菜单里；渠道供应商实时生效，API 路由写入配置后立即重载。',
+        'hidden.localHint': '该供应商不支持原生屏蔽，仅在此页隐藏。',
+        'hidden.showHidden': '显示已屏蔽',
+        'edition.intl': '国际版',
+        'edition.cn': '国内版',
+        'edition.shared': '共用',
+        'edition.hide': '屏蔽',
+        'edition.restore': '恢复',
+        'edition.all': '全部版本',
+        'edition.hint': 'WorkBuddy 分国内版与国际版：国际版模型走 workbuddy.ai，国内版走腾讯 CodeBuddy；可整组屏蔽。',
       },
       en: {
         nav: 'Model Manager',
@@ -199,6 +252,59 @@ window.__ModuleLoader__.load({
         'quota.standard': 'standard',
         'quota.credits': 'credits',
         'quota.hint': '“Weighted/day” applies each model’s own price multiplier, so burn rates compare fairly; “Speed” is output tokens/second from the channel ledger.',
+        'tab.usage': 'Usage',
+        'usage.title': 'Usage',
+        'usage.subtitle': 'Real token usage by hour, day, week, half-month and month, read from the session log.',
+        'usage.provider': 'Provider',
+        'usage.all': 'All providers',
+        'usage.period.hour': 'Hour',
+        'usage.period.day': 'Day',
+        'usage.period.week': 'Week',
+        'usage.period.half': 'Half-month',
+        'usage.period.month': 'Month',
+        'usage.total': '{period} total',
+        'usage.buckets': '{n} buckets',
+        'usage.table.bucket': 'Bucket',
+        'usage.table.tokens': 'tokens',
+        'usage.table.requests': 'Requests',
+        'usage.table.avg': 'Avg tokens/call',
+        'usage.table.top': 'Top models',
+        'usage.empty': 'No usage in the selected window.',
+        'usage.loading': 'Reading session logs…',
+        'usage.error': 'Could not load usage',
+        'usage.partial': 'Some sessions are not fully read yet; totals may be slightly low',
+        'usage.refresh': 'Refresh usage',
+        'usage.checked': 'updated {time}',
+        'usage.idle': 'not loaded yet',
+        'quota.plan': 'Plan quota',
+        'quota.plan.remaining': '{n}% left',
+        'quota.plan.reset': 'resets {date}',
+        'quota.plan.rolling': 'Rolling',
+        'quota.plan.weekly': 'This week',
+        'quota.plan.monthly': 'This month',
+        'quota.plan.none': 'No plan data yet',
+        'quota.plan.hint': 'Read from the provider API, metered per key — independent of local logs.',
+        'usage.source.logs': 'Session logs: {files} sessions · {requests} requests',
+        'usage.source.snapshot': 'Host snapshot: {sessions} sessions (may be incomplete)',
+        'usage.source.unavailable': 'Logs unreadable; totals may be low',
+        'hidden.chip': 'hidden',
+        'hidden.show': 'Hide',
+        'hidden.restore': 'Restore',
+        'hidden.count': '{n} hidden',
+        'hidden.restoreAll': 'Restore all',
+        'hidden.hideAll': 'Hide all',
+        'hidden.confirm': 'Click again to confirm',
+        'hidden.saved': 'Updated: {n} models hidden',
+        'hidden.hint': 'Hidden models disappear from the conversation model menu; channel providers apply immediately, API routes reload after a config write.',
+        'hidden.localHint': 'This provider has no native hide switch; the choice only applies to this page.',
+        'hidden.showHidden': 'Show hidden',
+        'edition.intl': 'International',
+        'edition.cn': 'Domestic',
+        'edition.shared': 'Shared',
+        'edition.hide': 'Hide',
+        'edition.restore': 'Restore',
+        'edition.all': 'All editions',
+        'edition.hint': 'WorkBuddy has two builds: international models run on workbuddy.ai, domestic ones on Tencent CodeBuddy; each group can be hidden at once.',
       },
     }
 
@@ -357,6 +463,29 @@ window.__ModuleLoader__.load({
     }
 
     /** Day count, clamped to hours when below one day. */
+    /** Reset timestamps of plan windows are days away, so show date + time. */
+    function fmtReset(ts) {
+      if (typeof ts !== 'string' || ts === '') return ''
+      const when = new Date(ts)
+      if (Number.isNaN(when.getTime())) return ''
+      try {
+        return when.toLocaleString(undefined, { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })
+      } catch {
+        return when.toISOString().slice(5, 16).replace('T', ' ')
+      }
+    }
+
+    /** Where the usage numbers came from, so the coverage is never a guess. */
+    function sourceText(source, t) {
+      if (source === undefined || source === null) return null
+      if (source.kind === 'logs') {
+        return t('usage.source.logs', { files: fmtNum(source.files ?? 0), requests: fmtNum(source.requests ?? 0) })
+      }
+      if (source.kind === 'snapshot') return t('usage.source.snapshot', { sessions: fmtNum(source.sessions ?? 0) })
+      if (source.kind === 'logs-unavailable') return t('usage.source.unavailable')
+      return null
+    }
+
     function fmtDays(value) {
       if (!Number.isFinite(value) || value <= 0) return '—'
       if (value < 1) return `${Math.max(1, Math.round(value * 24))}h`
@@ -427,6 +556,12 @@ window.__ModuleLoader__.load({
           return h('svg', common, h('path', { d: 'M21 8.5 12 3 3 8.5v7L12 21l9-5.5z' }), h('path', { d: 'M3 8.5 12 14l9-5.5' }), h('path', { d: 'M12 14v7' }))
         case 'spark':
           return h('svg', common, h('path', { d: 'M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8' }))
+        case 'eye':
+          return h('svg', common, h('path', { d: 'M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z' }), h('circle', { cx: 12, cy: 12, r: 2.6 }))
+        case 'eyeOff':
+          return h('svg', common, h('path', { d: 'M3 3l18 18' }), h('path', { d: 'M10.6 6.2A9.9 9.9 0 0 1 12 6c6.5 0 10 6 10 6a17 17 0 0 1-3.2 3.7' }), h('path', { d: 'M6.2 7.6C3.6 9.2 2 12 2 12s3.5 6 10 6a10.6 10.6 0 0 0 4.1-.8' }))
+        case 'chart':
+          return h('svg', common, h('path', { d: 'M4 20V10M10 20V4M16 20v-7M22 20H2' }))
         default:
           return null
       }
@@ -572,6 +707,15 @@ window.__ModuleLoader__.load({
 .mm-qcard-row b{color:var(--dsw-alias-label-primary);font-weight:560;font-size:12px}
 .mm-bar{height:4px;border-radius:999px;background:var(--dsw-alias-bg-layer-2);overflow:hidden;position:relative}
 .mm-bar i{position:absolute;inset-block:0;left:0;border-radius:999px;background:linear-gradient(90deg,var(--dsw-alias-brand-primary),#7B5CFF);opacity:.85}
+.mm-plan{display:flex;flex-direction:column;gap:6px;padding:8px 0 2px;border-top:1px dashed var(--dsw-alias-border-l1)}
+.mm-plan-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;font-size:11px;color:var(--dsw-alias-label-secondary)}
+.mm-plan-label{white-space:nowrap}
+.mm-plan-val{font-variant-numeric:tabular-nums;color:var(--dsw-alias-label-primary);font-weight:600}
+.mm-plan-row .mm-mini{grid-column:2 / -1;text-align:right;font-size:10px;opacity:.8}
+.mm-bar-slim{height:5px;border-radius:99px;background:var(--dsw-alias-bg-layer-0, rgba(0,0,0,.06));overflow:hidden}
+.mm-bar-slim>i{display:block;height:100%;border-radius:99px;background:var(--dsw-alias-state-success-primary, #16a34a);transition:width .25s ease}
+.mm-bar-slim>i[data-status="warn"]{background:var(--dsw-alias-state-warn-primary)}
+.mm-bar-slim>i[data-status="critical"]{background:var(--dsw-alias-state-error-primary)}
 .mm-pkg{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11px;color:var(--dsw-alias-label-secondary);padding:3px 0;border-top:1px dashed var(--dsw-alias-border-l1)}
 .mm-pkg:first-of-type{border-top:none}
 .mm-pkg-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:60%}
@@ -593,6 +737,28 @@ window.__ModuleLoader__.load({
 .mm-burnbar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#4C8DFF,#7B5CFF)}
 .mm-sortsel{display:flex;align-items:center;gap:6px}
 .mm-sortsel select{height:30px;border-radius:8px;border:1px solid var(--dsw-alias-border-l1);background:var(--dsw-alias-bg-layer-2);color:var(--dsw-alias-label-primary);font:inherit;font-size:12px;padding:0 8px;outline:none}
+.mm-chartwrap{border:1px solid var(--dsw-alias-border-l1);border-radius:14px;background:var(--dsw-alias-bg-layer-1);padding:14px 14px 8px;margin-top:10px}
+.mm-chart-scroll{overflow-x:auto;overflow-y:hidden;padding-bottom:4px}
+.mm-chart{display:flex;align-items:flex-end;gap:3px;height:180px;min-width:100%}
+.mm-bar-col{position:relative;flex:1 0 auto;width:14px;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;min-width:10px;cursor:default}
+.mm-bar-col i{display:block;width:100%;border-radius:3px 3px 0 0;background:linear-gradient(180deg,#7B5CFF,#4C8DFF);opacity:.9;min-height:2px;transition:opacity .15s}
+.mm-bar-col:hover i{opacity:1;box-shadow:0 0 0 1px color-mix(in srgb, var(--dsw-alias-brand-primary) 50%, transparent)}
+.mm-bar-col span{font-size:9px;color:var(--dsw-alias-label-secondary);white-space:nowrap;transform:rotate(-45deg);transform-origin:center;height:14px;line-height:14px}
+.mm-usage-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:16px}
+@media (max-width:900px){.mm-usage-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.mm-model[data-hidden="true"]{opacity:.58}
+.mm-eye{width:30px;height:30px;padding:0;display:inline-flex;align-items:center;justify-content:center;border-radius:8px;border:1px solid var(--dsw-alias-border-l1);background:transparent;color:var(--dsw-alias-label-secondary);cursor:pointer}
+.mm-eye:hover{border-color:var(--dsw-alias-brand-primary);color:var(--dsw-alias-label-primary)}
+.mm-eye[data-on="true"]{color:var(--dsw-alias-state-warn-primary);border-color:color-mix(in srgb, var(--dsw-alias-state-warn-primary) 45%, transparent)}
+.mm-check{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--dsw-alias-label-secondary);cursor:pointer;user-select:none}
+.mm-check input{accent-color:var(--dsw-alias-brand-primary)}
+.mm-detail-actions{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.mm-editions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px}
+.mm-edition{display:flex;align-items:center;gap:6px;padding:4px 8px;border:1px solid var(--dsw-alias-border-l1);border-radius:9px;background:var(--dsw-alias-bg-layer-2);font-size:11px;color:var(--dsw-alias-label-secondary)}
+.mm-edition b{color:var(--dsw-alias-label-primary);font-weight:560;font-size:12px}
+.mm-edition .mm-btn{height:24px;padding:0 8px;font-size:11px;border-radius:6px}
+.mm-chip-intl{border-color:color-mix(in srgb, #4C8DFF 45%, transparent);color:#3F7BE0;background:color-mix(in srgb, #4C8DFF 10%, transparent)}
+.mm-chip-cn{border-color:color-mix(in srgb, #F2A65A 45%, transparent);color:#B8702A;background:color-mix(in srgb, #F2A65A 12%, transparent)}
 `
 
     function apply(ctx) {
@@ -624,8 +790,40 @@ window.__ModuleLoader__.load({
         const quotaRef = useRef(quota)
         const [quotaBusy, setQuotaBusy] = useState(false)
         const [sortBy, setSortBy] = useState('burn')
+        const [usageState, setUsageState] = useState({ status: 'idle', value: null, error: null, busy: false })
+        const usageRef = useRef(usageState)
+        const [usageProvider, setUsageProvider] = useState('opencode-go')
+        const [usagePeriod, setUsagePeriod] = useState('day')
+        const [usageProviders, setUsageProviders] = useState([])
+        const [hiddenBusy, setHiddenBusy] = useState(false)
+        const [showHidden, setShowHidden] = useState(true)
+        const [editionFilter, setEditionFilter] = useState('all')
+        const [confirmAll, setConfirmAll] = useState(null)
 
         useEffect(() => { quotaRef.current = quota }, [quota])
+        useEffect(() => { usageRef.current = usageState }, [usageState])
+
+        const loadUsage = useCallback(async (providerId) => {
+          setUsageState((current) => ({ status: current.value === null ? 'loading' : 'ready', value: current.value, error: null, busy: true }))
+          try {
+            const query = providerId === null || providerId === '' ? '?days=30' : `?provider=${encodeURIComponent(providerId)}&days=30`
+            const value = await api(`/usage${query}`, { timeout: 180000 })
+            setUsageState({ status: 'ready', value, error: null, busy: false })
+            return value
+          } catch (error) {
+            setUsageState((current) => ({ status: 'error', value: current.value, error: describeError(error), busy: false }))
+            return null
+          }
+        }, [])
+
+        /** First open of the usage tab (and provider switches) load the series. */
+        useEffect(() => {
+          if (view !== 'usage') return
+          const loadedFor = usageRef.current.value?.provider ?? null
+          const wanted = usageProvider === '' ? null : usageProvider
+          if (usageRef.current.status === 'ready' && loadedFor === wanted) return
+          void loadUsage(usageProvider)
+        }, [view, usageProvider, loadUsage])
 
         const loadQuota = useCallback(async (options) => {
           const current = quotaRef.current
@@ -684,14 +882,39 @@ window.__ModuleLoader__.load({
         const loadModels = useCallback(async (providerId, options) => {
           const existing = catalogRef.current[providerId]
           if (options?.force !== true && existing !== undefined && (existing.status === 'ready' || existing.status === 'loading')) return
-          putCatalog(providerId, { status: 'loading', models: [], error: null })
+          putCatalog(providerId, { status: 'loading', models: [], error: null, mechanism: existing?.mechanism ?? null })
           try {
-            const value = await api(`/models?provider=${encodeURIComponent(providerId)}`, { timeout: 15000 })
-            putCatalog(providerId, { status: 'ready', models: value.models ?? [], error: null })
+            const value = await api(`/models?provider=${encodeURIComponent(providerId)}`, { timeout: 20000 })
+            putCatalog(providerId, {
+              status: 'ready',
+              models: value.models ?? [],
+              error: null,
+              mechanism: value.mechanism ?? null,
+              hidden: Array.isArray(value.hidden) ? value.hidden : [],
+            })
           } catch (error) {
-            putCatalog(providerId, { status: 'error', models: [], error: describeError(error) })
+            putCatalog(providerId, { status: 'error', models: [], error: describeError(error), mechanism: null })
           }
         }, [putCatalog])
+
+        /** Hide/show models through the provider's own mechanism. */
+        const applyHidden = useCallback(async (providerId, hiddenIds) => {
+          setHiddenBusy(true)
+          try {
+            await api('/hidden', {
+              method: 'POST',
+              body: { provider: providerId, hidden: hiddenIds },
+              timeout: 60000,
+            })
+            await loadModels(providerId, { force: true })
+            setNotice({ kind: 'success', text: t('hidden.saved', { n: hiddenIds.length }) })
+          } catch (error) {
+            setNotice({ kind: 'error', text: t('notice.failed', { message: errorText(t, describeError(error)) }) })
+          } finally {
+            setHiddenBusy(false)
+            setConfirmAll(null)
+          }
+        }, [loadModels, t])
 
         const loadSummary = useCallback(async (options) => {
           if (options?.quiet === true) setRefreshing(true)
@@ -779,7 +1002,15 @@ window.__ModuleLoader__.load({
 
         const selectedProvider = summary.providers.find((provider) => provider.id === selected) ?? null
         const selectedEntry = selected === null ? undefined : catalog[selected]
-        const visibleModels = (selectedEntry?.models ?? []).filter(matchesModel)
+        const allModelsOfSelected = selectedEntry?.models ?? []
+        const hiddenIdsOfSelected = allModelsOfSelected.filter((model) => model.hidden === true).map((model) => model.id)
+        const intlModels = allModelsOfSelected.filter((model) => model.edition === 'intl')
+        const cnModels = allModelsOfSelected.filter((model) => model.edition === 'cn')
+        const hasEditions = intlModels.length > 0 || cnModels.length > 0
+        const visibleModels = allModelsOfSelected
+          .filter(matchesModel)
+          .filter((model) => showHidden || model.hidden !== true)
+          .filter((model) => editionFilter === 'all' || model.edition === editionFilter)
 
         async function setDefault(providerId, modelId) {
           const key = `${providerId}/${modelId}`
@@ -867,6 +1098,9 @@ window.__ModuleLoader__.load({
           const status = providerStatus(selectedProvider)
           const entry = selectedEntry
           const total = entry?.status === 'ready' ? entry.models.length : null
+          const hiddenCount = hiddenIdsOfSelected.length
+          const allIds = allModelsOfSelected.map((model) => model.id)
+          const mechanism = entry?.mechanism ?? null
           return h('div', { className: 'mm-detail' },
             h('div', { className: 'mm-detail-head' },
               h(Avatar, { id: selectedProvider.id, name: selectedProvider.name, size: 44, radius: 12 }),
@@ -891,18 +1125,82 @@ window.__ModuleLoader__.load({
                   selectedProvider.directory?.error ? h('span', { style: { color: 'var(--dsw-alias-state-error-primary)' } }, selectedProvider.directory.error) : null,
                 ),
               ),
-              h('button', {
-                type: 'button',
-                className: 'mm-btn',
-                disabled: entry?.status === 'loading',
-                title: t('detail.refresh'),
-                onClick: () => { void loadModels(selectedProvider.id, { force: true }) },
-              },
-              entry?.status === 'loading' ? h('span', { className: 'mm-spin' }) : h(Icon, { name: 'refresh', size: 15 }),
-              t('detail.refresh')),
+              h('div', { className: 'mm-detail-actions' },
+                h('button', {
+                  type: 'button',
+                  className: 'mm-btn',
+                  disabled: hiddenBusy || entry?.status !== 'ready' || hiddenCount === 0,
+                  onClick: () => { void applyHidden(selectedProvider.id, []) },
+                }, hiddenCount === 0 ? t('hidden.restoreAll') : `${t('hidden.restoreAll')} (${hiddenCount})`),
+                h('button', {
+                  type: 'button',
+                  className: 'mm-btn',
+                  disabled: hiddenBusy || entry?.status !== 'ready' || allIds.length === 0,
+                  onClick: () => {
+                    if (confirmAll === selectedProvider.id) void applyHidden(selectedProvider.id, allIds)
+                    else {
+                      setConfirmAll(selectedProvider.id)
+                      setNotice({ kind: 'success', text: t('hidden.confirm') })
+                    }
+                  },
+                }, confirmAll === selectedProvider.id ? t('hidden.confirm') : t('hidden.hideAll')),
+                h('label', { className: 'mm-check' },
+                  h('input', {
+                    type: 'checkbox',
+                    checked: showHidden,
+                    onChange: (event) => setShowHidden(event.target.checked),
+                  }),
+                  t('hidden.showHidden')),
+                h('button', {
+                  type: 'button',
+                  className: 'mm-btn',
+                  disabled: entry?.status === 'loading',
+                  title: t('detail.refresh'),
+                  onClick: () => { void loadModels(selectedProvider.id, { force: true }) },
+                },
+                entry?.status === 'loading' ? h('span', { className: 'mm-spin' }) : h(Icon, { name: 'refresh', size: 15 })),
+              ),
             ),
 
             h('div', { className: 'mm-detail-body' },
+              hasEditions
+                ? h('div', { className: 'mm-editions', title: t('edition.hint') },
+                  ...[['intl', 'edition.intl', intlModels], ['cn', 'edition.cn', cnModels]].map(([edition, labelKey, models]) => {
+                    const ids = new Set(models.map((model) => model.id))
+                    const hiddenCount2 = hiddenIdsOfSelected.filter((id) => ids.has(id)).length
+                    return h('span', { key: edition, className: 'mm-edition' },
+                      h('span', { className: edition === 'intl' ? 'mm-chip mm-chip-intl' : 'mm-chip mm-chip-cn' }, t(labelKey)),
+                      h('b', null, models.length),
+                      hiddenCount2 > 0 ? h('span', null, t('hidden.count', { n: hiddenCount2 })) : null,
+                      h('button', {
+                        type: 'button',
+                        className: 'mm-btn',
+                        disabled: hiddenBusy || models.length === 0,
+                        onClick: () => {
+                          const next = [...new Set([...hiddenIdsOfSelected, ...models.map((model) => model.id)])]
+                          void applyHidden(selectedProvider.id, next)
+                        },
+                      }, t('edition.hide')),
+                      h('button', {
+                        type: 'button',
+                        className: 'mm-btn',
+                        disabled: hiddenBusy || hiddenCount2 === 0,
+                        onClick: () => {
+                          const next = hiddenIdsOfSelected.filter((id) => !ids.has(id))
+                          void applyHidden(selectedProvider.id, next)
+                        },
+                      }, t('edition.restore')))
+                  }),
+                  h('div', { className: 'mm-seg' },
+                    ...[['all', 'edition.all'], ['intl', 'edition.intl'], ['cn', 'edition.cn']].map(([value, key]) =>
+                      h('button', {
+                        key: value,
+                        type: 'button',
+                        'data-on': editionFilter === value ? 'true' : 'false',
+                        onClick: () => setEditionFilter(value),
+                      }, t(key)))),
+                )
+                : null,
               entry === undefined || entry.status === 'loading'
                 ? h('div', { style: { display: 'flex', flexDirection: 'column', gap: '9px' } },
                   h('div', { className: 'mm-skel' }),
@@ -921,12 +1219,25 @@ window.__ModuleLoader__.load({
                       const isDefault = current !== null && current.provider === selectedProvider.id && current.model === model.id
                       const key = `${selectedProvider.id}/${model.id}`
                       const saving = pending === key
-                      return h('div', { key: model.id, className: 'mm-model', 'data-default': isDefault ? 'true' : 'false' },
+                      const hiddenModel = model.hidden === true
+                      return h('div', {
+                        key: model.id,
+                        className: 'mm-model',
+                        'data-default': isDefault ? 'true' : 'false',
+                        'data-hidden': hiddenModel ? 'true' : 'false',
+                      },
                         h('div', { className: 'mm-model-main' },
                           h('div', { className: 'mm-model-name' },
                             model.name,
                             h('span', { className: 'mm-model-id mm-mono' }, model.id),
+                            model.edition === 'intl'
+                              ? h('span', { className: 'mm-chip mm-chip-intl' }, t('edition.intl'))
+                              : model.edition === 'cn'
+                                ? h('span', { className: 'mm-chip mm-chip-cn' }, t('edition.cn'))
+                                : null,
                             isDefault ? h('span', { className: 'mm-chip mm-chip-brand' }, h(Icon, { name: 'check', size: 11 }), t('model.default')) : null,
+                            hiddenModel ? h('span', { className: 'mm-chip' }, h(Icon, { name: 'eyeOff', size: 11 }), t('hidden.chip')) : null,
+                            model.dead ? h('span', { className: 'mm-chip', style: { color: 'var(--dsw-alias-state-error-primary)' } }, t('status.error')) : null,
                           ),
                           model.description ? h('div', { className: 'mm-model-desc' }, model.description) : null,
                           (model.inputModalities ?? []).length > 0
@@ -941,14 +1252,34 @@ window.__ModuleLoader__.load({
                             : h('button', {
                               type: 'button',
                               className: 'mm-btn',
-                              disabled: saving || filter === undefined,
+                              disabled: saving,
                               onClick: () => { void setDefault(selectedProvider.id, model.id) },
-                            }, saving ? t('model.saving') : t('model.setDefault'))),
+                            }, saving ? t('model.saving') : t('model.setDefault')),
+                          h('button', {
+                            type: 'button',
+                            className: 'mm-eye',
+                            'data-on': hiddenModel ? 'true' : 'false',
+                            disabled: hiddenBusy,
+                            title: hiddenModel ? t('hidden.restore') : t('hidden.show'),
+                            'aria-label': hiddenModel ? t('hidden.restore') : t('hidden.show'),
+                            onClick: () => {
+                              const next = hiddenModel
+                                ? hiddenIdsOfSelected.filter((id) => id !== model.id)
+                                : [...hiddenIdsOfSelected, model.id]
+                              void applyHidden(selectedProvider.id, next)
+                            },
+                          }, h(Icon, { name: hiddenModel ? 'eyeOff' : 'eye', size: 15 })),
+                        ),
                       )
                     }),
               selectedProvider.registered === false && entry?.status !== 'error'
                 ? h('div', { className: 'mm-hint' }, t('err.notActive'))
                 : null,
+              entry?.mechanism === 'config'
+                ? h('div', { className: 'mm-hint' }, t('hidden.hint'))
+                : entry?.mechanism === 'local'
+                  ? h('div', { className: 'mm-hint' }, t('hidden.localHint'))
+                  : null,
             ))
         }
 
@@ -975,9 +1306,16 @@ window.__ModuleLoader__.load({
             if (queryText === '') return true
             return String(provider.name).toLowerCase().includes(queryText) || provider.id.toLowerCase().includes(queryText)
           })
+          // A provider that is metered by a subscription plan has no credit account at all,
+          // so the plan windows are its only real balance — it must appear here too.
+          const hasPlan = (provider) => {
+            const plan = provider.plan
+            return plan !== undefined && plan !== null && plan.ok === true && (plan.windows ?? []).length > 0
+          }
           const quotaProviders = providers.filter((provider) => provider.quota.kind === 'credits'
             || provider.quota.kind === 'wallet'
-            || (provider.quota.kind === 'unknown' && provider.quota.error !== 'no-accounts'))
+            || (provider.quota.kind === 'unknown' && provider.quota.error !== 'no-accounts')
+            || hasPlan(provider))
           const withQuota = value.providers.filter((provider) => provider.quota.kind === 'credits' || provider.quota.kind === 'wallet').length
           const bySort = [...value.models].filter((model) => queryText === ''
             || String(model.name).toLowerCase().includes(queryText)
@@ -1034,6 +1372,12 @@ window.__ModuleLoader__.load({
                   const remainingPackages = (info.packages ?? []).reduce((sum, pkg) => sum + (pkg.remaining ?? 0), 0)
                   const ratio = totalPackages > 0 ? Math.max(0, Math.min(1, remainingPackages / totalPackages)) : null
                   const low = ratio !== null && ratio <= 0.2
+                  const plan = provider.plan
+                  const planWindows = plan !== undefined && plan !== null && plan.ok === true ? plan.windows ?? [] : []
+                  // The headline shows the tightest window: that is the one that will block you first.
+                  const planPrimary = planWindows.reduce((worst, entry) => (worst === null || entry.remaining < worst.remaining ? entry : worst), null)
+                  // A metered plan is the real balance for a provider with no credit account.
+                  const planAmount = planPrimary !== null && remaining === null
                   return h('div', { key: provider.id, className: 'mm-qcard', 'data-kind': info.kind },
                     h('div', { className: 'mm-qcard-head' },
                       h(Avatar, { id: provider.id, name: provider.name, size: 30, radius: 9 }),
@@ -1042,9 +1386,10 @@ window.__ModuleLoader__.load({
                         h('div', { className: 'mm-qcard-id mm-mono' }, provider.id)),
                       info.windowDays ? h('span', { className: 'mm-chip' }, t('quota.window', { n: info.windowDays })) : null,
                       isWallet ? h('span', { className: 'mm-chip mm-chip-brand' }, 'DeepSeek') : null),
-                    h('div', { className: 'mm-qcard-amount', 'data-zero': remaining === 0 ? 'true' : 'false', 'data-low': low ? 'true' : 'false' },
-                      h('span', { className: 'mm-qcard-value' }, isWallet ? fmtMoney(remaining, info.currency) : fmtQuota(remaining, info.unit)),
-                      h('span', { className: 'mm-qcard-unit' }, isWallet ? (info.currency ?? '') : unitText(info.unit, t)),
+                    h('div', { className: 'mm-qcard-amount', 'data-zero': remaining === 0 ? 'true' : 'false', 'data-low': (low || (planPrimary !== null && planPrimary.percent >= 80)) ? 'true' : 'false' },
+                      h('span', { className: 'mm-qcard-value' }, planAmount ? fmtNum(planPrimary.remaining) : isWallet ? fmtMoney(remaining, info.currency) : fmtQuota(remaining, info.unit)),
+                      h('span', { className: 'mm-qcard-unit' }, planAmount ? '%' : isWallet ? (info.currency ?? '') : unitText(info.unit, t)),
+                      planAmount ? h('span', { className: 'mm-chip' }, t(`quota.plan.${planPrimary.key}`)) : null,
                       provider.burn?.runwayDays ? h('span', { className: 'mm-chip mm-chip-brand' }, t('quota.runway', { days: fmtDays(provider.burn.runwayDays) })) : null),
                     ratio !== null ? h('div', { className: 'mm-bar' }, h('i', { style: { width: `${Math.round(ratio * 100)}%` } })) : null,
                     packages.length > 0
@@ -1052,6 +1397,16 @@ window.__ModuleLoader__.load({
                         h('span', { className: 'mm-pkg-name', title: pkg.name }, pkg.name),
                         h('span', { className: 'mm-pkg-val' }, `${fmtCompact(pkg.remaining)} / ${fmtCompact(pkg.total)}`))))
                       : null,
+                    planWindows.length > 0
+                      ? h('div', { className: 'mm-plan' },
+                        ...planWindows.filter((entry) => !planAmount || entry.key !== planPrimary.key).map((entry) => h('div', { key: entry.key, className: 'mm-plan-row', 'data-key': entry.key },
+                          h('span', { className: 'mm-plan-label' }, t(`quota.plan.${entry.key}`)),
+                          h('span', { className: 'mm-bar mm-bar-slim' }, h('i', { style: { width: `${Math.max(2, entry.percent)}%` }, 'data-status': entry.status ?? '' })),
+                          h('b', { className: 'mm-plan-val' }, t('quota.plan.remaining', { n: fmtNum(entry.remaining) })),
+                          entry.resetsAt ? h('span', { className: 'mm-mini' }, t('quota.plan.reset', { date: fmtReset(entry.resetsAt) })) : null)))
+                      : plan !== undefined && plan !== null && plan.ok !== true
+                        ? h('div', { className: 'mm-qerror' }, h(Icon, { name: 'box', size: 11 }), plan.error ?? t('quota.plan.none'))
+                        : null,
                     h('div', { className: 'mm-qcard-row' },
                       h('span', null, t('quota.today')),
                       h('b', null, fmtCompact(provider.usage?.todayTokens ?? 0))),
@@ -1115,15 +1470,163 @@ window.__ModuleLoader__.load({
           )
         }
 
+        /** Provider choices for the usage tab (only routes with recorded usage). */
+        const usageProviderList = useRef([])
+        useEffect(() => {
+          if (view !== 'usage') return
+          if (usageProviderList.current.length > 0) return
+          void (async () => {
+            try {
+              const value = await api('/usage?days=30', { timeout: 180000 })
+              const seen = new Set()
+              const list = []
+              for (const model of value.models ?? []) {
+                if (seen.has(model.provider)) continue
+                seen.add(model.provider)
+                list.push({ id: model.provider, name: summary.providers.find((provider) => provider.id === model.provider)?.name ?? model.provider })
+              }
+              usageProviderList.current = list
+              setUsageProviders(list)
+            } catch {
+              usageProviderList.current = []
+            }
+          })()
+        }, [view, summary.providers])
+
+        function renderUsage() {
+          const value = usageState.value
+          if (usageState.status === 'loading' && value === null) {
+            return h('div', { className: 'mm-qsection' },
+              h('div', { style: { display: 'flex', flexDirection: 'column', gap: '10px', width: '100%' } },
+                h('div', { className: 'mm-skel', style: { height: '80px' } }),
+                h('div', { className: 'mm-skel', style: { height: '210px' } }),
+                h('div', { className: 'mm-skel', style: { height: '180px' } })))
+          }
+          if (value === null) {
+            return h('div', { className: 'mm-empty', style: { marginTop: '16px' } },
+              h('span', { className: 'mm-empty-icon' }, h(Icon, { name: 'chart', size: 26 })),
+              h('span', null, `${t('usage.error')}${usageState.error ? `（${errorText(t, usageState.error)}）` : ''}`),
+              h('button', { type: 'button', className: 'mm-btn', onClick: () => { void loadUsage(usageProvider) } }, t('error.retry')))
+          }
+          const periods = [['hour', 'usage.period.hour'], ['day', 'usage.period.day'], ['week', 'usage.period.week'], ['half', 'usage.period.half'], ['month', 'usage.period.month']]
+          const limits = { hour: 48, day: 30, week: 12, half: 8, month: 6 }
+          const buckets = (value.buckets?.[usagePeriod] ?? []).slice(-(limits[usagePeriod] ?? 30))
+          const max = buckets.reduce((top, bucket) => Math.max(top, bucket.tokens), 0) || 1
+          const labelStep = Math.max(1, Math.ceil(buckets.length / 12))
+          const sum = buckets.reduce((total, bucket) => total + bucket.tokens, 0)
+          const requests = buckets.reduce((total, bucket) => total + bucket.requests, 0)
+          const providerName = (id) => summary.providers.find((provider) => provider.id === id)?.name ?? id
+          const providerOptions = usageProviders.length > 0 ? [...usageProviders] : [{ id: 'opencode-go', name: 'opencode-go' }]
+          if (usageProvider !== '' && !providerOptions.some((provider) => provider.id === usageProvider)) {
+            providerOptions.unshift({ id: usageProvider, name: providerName(usageProvider) })
+          }
+
+          const bars = buckets.map((bucket, index) => h('div', {
+            key: bucket.key,
+            className: 'mm-bar-col',
+            title: `${bucket.label} · ${fmtCompact(bucket.tokens)} tokens · ${bucket.requests} 次`,
+          },
+            h('i', { style: { height: `${Math.max(2, Math.round((bucket.tokens / max) * 100))}%` } }),
+            index % labelStep === 0 ? h('span', null, bucket.label) : h('span', null, ''),
+          ))
+
+          const chartBlock = h('div', { className: 'mm-chartwrap' },
+            buckets.length === 0
+              ? h('div', { className: 'mm-empty', style: { border: 'none' } }, t('usage.empty'))
+              : h('div', { className: 'mm-chart-scroll' }, h('div', { className: 'mm-chart' }, ...bars)),
+          )
+
+          const rows = [...buckets].reverse().map((bucket) => h('tr', { key: bucket.key },
+            h('td', null, bucket.label),
+            h('td', { className: 'mm-num' }, fmtCompact(bucket.tokens)),
+            h('td', { className: 'mm-num' }, fmtNum(bucket.requests)),
+            h('td', { className: 'mm-num' }, fmtCompact(bucket.requests > 0 ? bucket.tokens / bucket.requests : 0)),
+            h('td', null, h('div', { style: { display: 'flex', gap: '4px', flexWrap: 'wrap' } },
+              ...(bucket.models ?? []).slice(0, 3).map((entry) => h('span', { key: entry.key, className: 'mm-chip' }, entry.key.split('/')[1])))),
+          ))
+
+          const tableBlock = h('div', { className: 'mm-tablewrap' },
+            buckets.length === 0
+              ? h('div', { className: 'mm-empty', style: { margin: '14px', border: 'none' } }, t('usage.empty'))
+              : h('div', { className: 'mm-table-scroll' },
+                h('table', { className: 'mm-table' },
+                  h('thead', null, h('tr', null,
+                    h('th', null, t('usage.table.bucket')),
+                    h('th', { className: 'mm-num' }, t('usage.table.tokens')),
+                    h('th', { className: 'mm-num' }, t('usage.table.requests')),
+                    h('th', { className: 'mm-num' }, t('usage.table.avg')),
+                    h('th', null, t('usage.table.top')),
+                  )),
+                  h('tbody', null, ...rows),
+                ),
+              ),
+          )
+
+          return h('div', null,
+            h('div', { className: 'mm-qsection' },
+              h('div', { style: { display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' } },
+                h('span', { className: 'mm-qsection-title' }, t('usage.provider')),
+                h('div', { className: 'mm-sortsel' },
+                  h('select', {
+                    value: usageProvider,
+                    onChange: (event) => setUsageProvider(event.target.value),
+                    'aria-label': t('usage.provider'),
+                  },
+                  h('option', { value: '' }, t('usage.all')),
+                  ...providerOptions.map((provider) =>
+                    h('option', { key: provider.id, value: provider.id }, provider.name)),
+                  )),
+                h('div', { className: 'mm-seg', role: 'tablist' },
+                  ...periods.map(([value2, key]) => h('button', {
+                    key: value2,
+                    type: 'button',
+                    role: 'tab',
+                    'data-on': usagePeriod === value2 ? 'true' : 'false',
+                    onClick: () => setUsagePeriod(value2),
+                  }, t(key)))),
+              ),
+              h('button', {
+                type: 'button',
+                className: 'mm-btn',
+                disabled: usageState.busy,
+                onClick: () => { void loadUsage(usageProvider) },
+              }, usageState.busy ? h('span', { className: 'mm-spin' }) : h(Icon, { name: 'refresh', size: 14 }),
+              usageState.busy ? t('usage.loading') : t('usage.refresh')),
+            ),
+
+            h('div', { className: 'mm-usage-grid' },
+              h('div', { className: 'mm-card' },
+                h('span', { className: 'mm-card-label' }, t('usage.total', { period: t(periods.find((entry) => entry[0] === usagePeriod)?.[1] ?? 'usage.period.day') })),
+                h('span', { className: 'mm-card-value' }, fmtCompact(sum), h('span', { className: 'mm-card-unit' }, 'tokens')),
+                h('span', { className: 'mm-card-sub' }, t('usage.buckets', { n: buckets.length }))),
+              h('div', { className: 'mm-card' },
+                h('span', { className: 'mm-card-label' }, t('usage.table.requests')),
+                h('span', { className: 'mm-card-value' }, fmtNum(requests)),
+                h('span', { className: 'mm-card-sub' }, `${fmtCompact(requests > 0 ? sum / requests : 0)} tokens/次`)),
+              h('div', { className: 'mm-card' },
+                h('span', { className: 'mm-card-label' }, t('usage.table.top')),
+                h('span', { className: 'mm-card-value', style: { fontSize: '15px' } }, value.models?.[0] ? providerName(value.models[0].provider) : '—'),
+                h('span', { className: 'mm-card-sub' }, value.models?.[0]?.model ?? '')),
+              h('div', { className: 'mm-card' },
+                h('span', { className: 'mm-card-label' }, '30d'),
+                h('span', { className: 'mm-card-value' }, fmtCompact(value.totals?.tokens ?? 0), h('span', { className: 'mm-card-unit' }, 'tokens')),
+                h('span', { className: 'mm-card-sub', title: `${t('usage.checked', { time: fmtTime(value.at) })}` }, sourceText(value.source, t) ?? (value.partial ? t('usage.partial') : t('usage.checked', { time: fmtTime(value.at) })))),
+            ),
+
+            chartBlock,
+            tableBlock,
+          )
+        }
+
         return h('div', { className: 'mm-page' },
           h('style', null, CSS),
           h('div', { className: 'mm-wrap' },
             h('header', { className: 'mm-head' },
               h('div', { style: { minWidth: 0 } },
-                h('h1', { className: 'mm-title' }, view === 'quota' ? t('quota.title') : t('title')),
-                h('p', { className: 'mm-sub' }, view === 'quota' ? t('quota.subtitle') : t('subtitle')),
+                h('h1', { className: 'mm-title' }, view === 'quota' ? t('quota.title') : view === 'usage' ? t('usage.title') : t('title')),
+                h('p', { className: 'mm-sub' }, view === 'quota' ? t('quota.subtitle') : view === 'usage' ? t('usage.subtitle') : t('subtitle')),
                 h('div', { className: 'mm-tabs', role: 'tablist' },
-                  ...[['models', 'tab.models'], ['quota', 'tab.quota']].map(([value, key]) =>
+                  ...[['models', 'tab.models'], ['quota', 'tab.quota'], ['usage', 'tab.usage']].map(([value, key]) =>
                     h('button', {
                       key: value,
                       type: 'button',
@@ -1178,7 +1681,11 @@ window.__ModuleLoader__.load({
                   ? quota.value === null
                     ? t('quota.loading')
                     : `${quota.value.models.length} ${t('quota.table.model')} · ${fmtCompact(quota.value.totals?.tokens)} tokens`
-                  : t('stats', { providers: summary.providers.length, models: loadedModels })),
+                  : view === 'usage'
+                    ? usageState.value === null
+                      ? t('usage.loading')
+                      : `${usageState.value.models?.length ?? 0} ${t('quota.table.model')} · ${fmtCompact(usageState.value.totals?.tokens)} tokens`
+                    : t('stats', { providers: summary.providers.length, models: loadedModels })),
             ),
 
             view === 'models'
@@ -1197,7 +1704,9 @@ window.__ModuleLoader__.load({
                 ),
                 renderDetail(),
               )
-              : renderQuota(),
+              : view === 'usage'
+                ? renderUsage()
+                : renderQuota(),
           ),
           notice === null ? null : h('div', { className: 'mm-toast', 'data-kind': notice.kind, role: 'status' },
             h('span', { className: 'mm-toast-dot' }),

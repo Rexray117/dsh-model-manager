@@ -38,6 +38,16 @@ function readJsonFile(file) {
   }
 }
 
+/** The DSH home this process serves (used by the hidden-model store). */
+export function dshHome() {
+  return homeDir()
+}
+
+/** Durable channel-pack state: accounts and per-provider disabled models. */
+export function channelState() {
+  return readJsonFile(path.join(homeDir(), 'channel-pack', 'state.json'))
+}
+
 /** Day key in UTC+8, matching the ledger's own bucketing. */
 export function dayKey(ts) {
   const shifted = new Date(ts + 8 * 60 * 60 * 1000)
@@ -71,7 +81,7 @@ function addUsage(target, delta) {
   target.errors += delta.errors
 }
 
-export function createQuota(ctx) {
+export function createQuota(ctx, scan) {
   const state = {
     ledger: { at: 0, days: new Map() },
     sessions: { at: 0, days: new Map(), partial: false },
@@ -188,8 +198,33 @@ export function createQuota(ctx) {
    * model and token usage of every real call, including API-only routes.
    */
   async function readSessions(daysWanted, budgetMs = 9000) {
-    const query = ctx.get('sessionQuery')
     const out = new Map()
+    if (scan !== undefined) {
+      const result = await scan.rows({ since: Date.now() - daysWanted * DAY_MS })
+      if (result.supported !== false) {
+        for (const row of result.rows) {
+          const day = dayKey(row.t)
+          const key = `${row.provider}${LEDGER_KEY_SEP}${row.model}`
+          const perDay = out.get(day) ?? new Map()
+          const delta = {
+            tokens: row.tokens,
+            input: row.input,
+            output: row.output,
+            cacheRead: row.cacheRead,
+            cacheWrite: row.cacheWrite,
+            reasoning: row.reasoning,
+            requests: 1,
+            errors: 0,
+          }
+          const existing = perDay.get(key)
+          if (existing === undefined) perDay.set(key, { ...delta, tps: null })
+          else addUsage(existing, delta)
+          out.set(day, perDay)
+        }
+        return { days: out, partial: false, source: 'logs', requests: result.rows.length }
+      }
+    }
+    const query = ctx.get('sessionQuery')
     if (query === undefined
       || typeof query.filterSessions !== 'function'
       || typeof query.readSession !== 'function') {
