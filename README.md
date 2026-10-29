@@ -1,6 +1,7 @@
 # Model Manager · 模型与供应商管理
 
 [![DSH Plugin](https://img.shields.io/badge/DeepSeek%20Harness-plugin-4a7dff)](https://github.com/Rexray117/dsh-model-manager)
+[![CI](https://github.com/Rexray117/dsh-model-manager/actions/workflows/ci.yml/badge.svg)](https://github.com/Rexray117/dsh-model-manager/actions/workflows/ci.yml)
 [![version](https://img.shields.io/badge/version-1.4.1-brightgreen)](https://github.com/Rexray117/dsh-model-manager/releases)
 [![license](https://img.shields.io/badge/license-MIT-blue)](./LICENSE)
 [![platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)]()
