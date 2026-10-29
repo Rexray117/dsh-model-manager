@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  syntax:
+    name: Syntax check (node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: node --check every module
+        run: |
+          status=0
+          for f in *.js; do
+            echo "-> $f"
+            node --check "$f" || status=1
+          done
+          exit $status
+      - name: Validate JSON manifests
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('package.json','utf8')); console.log('package.json ok')"
+          for f in locale/*.json; do
+            node -e "JSON.parse(require('fs').readFileSync('$f','utf8')); console.log('$f ok')"
+          done
+      - name: No runtime dependencies expected
+        run: |
+          node -e "const p=require('./package.json'); if (p.dependencies && Object.keys(p.dependencies).length) { console.error('unexpected dependencies'); process.exit(1) } console.log('no dependencies ok')"
